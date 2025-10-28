@@ -1,6 +1,6 @@
 {
   "name": "@habemus-papadum/coiled-widgets",
-  "version": "0.1.0",
+  "version": "0.1.1-alpha",
   "type": "module",
   "description": "Frontend widgets for coiled",
   "main": "dist/index.js",
