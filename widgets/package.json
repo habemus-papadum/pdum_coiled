@@ -36,7 +36,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/habemus-papadum/coiled.git",
+    "url": "https://github.com/habemus-papadum/pdum_coiled.git",
     "directory": "widgets"
   },
   "dependencies": {},

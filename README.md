@@ -1,8 +1,8 @@
 # coiled
 
-[![CI](https://github.com/habemus-papadum/coiled/actions/workflows/ci.yml/badge.svg)](https://github.com/habemus-papadum/coiled/actions/workflows/ci.yml)
-[![TypeScript Coverage](https://raw.githubusercontent.com/habemus-papadum/coiled/typescript-coverage-badge/typescript-coverage.svg)](https://github.com/habemus-papadum/coiled/tree/main/widgets)
-[![PyPI](https://img.shields.io/pypi/v/coiled.svg)](https://pypi.org/project/coiled/)
+[![CI](https://github.com/habemus-papadum/pdum_coiled/actions/workflows/ci.yml/badge.svg)](https://github.com/habemus-papadum/pdum_coiled/actions/workflows/ci.yml)
+[![TypeScript Coverage](https://raw.githubusercontent.com/habemus-papadum/pdum_coiled/typescript-coverage-badge/typescript-coverage.svg)](https://github.com/habemus-papadum/pdum_coiled/tree/main/widgets)
+[![PyPI](https://img.shields.io/pypi/v/coiled.svg)](https://pypi.org/project/habemus-papadum-coiled/)
 [![Python 3.14+](https://img.shields.io/badge/python-3.14+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
@@ -14,13 +14,13 @@ Coiled utils
 Install using pip:
 
 ```bash
-pip install coiled
+pip install habemus-papadum-coiled
 ```
 
 Or using uv:
 
 ```bash
-uv pip install coiled
+uv pip install habemus-papadum-coiled
 ```
 
 ## Usage
@@ -44,7 +44,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 
 # Clone the repository
-git clone https://github.com/habemus-papadum/coiled.git
+git clone https://github.com/habemus-papadum/pdum_coiled.git
 cd coiled
 
 # Provision the entire toolchain (uv sync, pnpm install, widget build, pre-commit hooks)
