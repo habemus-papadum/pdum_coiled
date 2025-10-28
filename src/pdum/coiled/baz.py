@@ -1,5 +1,6 @@
 from pdum.coiled.foo import bar
 
+
 def baz_function():
     return bar() + " from baz"
 
