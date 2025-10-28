@@ -4,14 +4,14 @@
 
 | Name                                    |    Stmts |     Miss |   Cover |   Missing |
 |---------------------------------------- | -------: | -------: | ------: | --------: |
-| src/pdum/coiled/\_\_init\_\_.py         |        3 |        0 |    100% |           |
-| src/pdum/coiled/baz.py                  |        5 |        5 |      0% |       1-8 |
-| src/pdum/coiled/foo.py                  |        2 |        2 |      0% |       1-2 |
+| src/pdum/coiled/\_\_init\_\_.py         |        5 |        0 |    100% |           |
+| src/pdum/coiled/fs/\_\_init\_\_.py      |       26 |       20 |     23% |32-60, 88-99 |
+| src/pdum/coiled/tar/\_\_init\_\_.py     |       26 |       17 |     35% |32-35, 72-81, 124-135 |
 | src/pdum/coiled/widgets/\_\_init\_\_.py |        4 |        0 |    100% |           |
 | src/pdum/coiled/widgets/renderer.py     |       23 |       11 |     52% |19-20, 26-33, 37-39, 45-47 |
 | src/pdum/coiled/widgets/utils.py        |       10 |        5 |     50% | 13, 19-25 |
 | src/pdum/coiled/widgets/widget.py       |       10 |        0 |    100% |           |
-|                               **TOTAL** |   **57** |   **23** | **60%** |           |
+|                               **TOTAL** |  **104** |   **53** | **49%** |           |
 
 
 ## Setup coverage badge
