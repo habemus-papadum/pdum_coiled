@@ -18,7 +18,9 @@ authors = [
     { name = "Nehal Patel", email = "nehal@alum.mit.edu" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "coiled>=1.128.2",
+]
 
 [project.urls]
 Homepage = "https://github.com/habemus-papadum/coiled"
