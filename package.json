@@ -2,6 +2,7 @@
   "name": "coiled",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@9.15.9",
   "description": "Coiled utils",
   "author": "Nehal Patel <nehal@alum.mit.edu>",
   "license": "MIT",
@@ -10,11 +11,11 @@
     "url": "https://github.com/habemus-papadum/pdum_coiled.git"
   },
   "scripts": {
-    
+
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "lint": "pnpm -r lint"
-    
+
   },
   "workspaces": [
     "widgets"
@@ -26,5 +27,5 @@
     "node": ">=18.0.0",
     "pnpm": ">=9.0.0"
   }
-  
+
 }

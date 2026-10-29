@@ -1,9 +1,9 @@
-"use strict";var CoiledWidgets=(()=>{var i="coiled-widget-template";function p(){if(document.getElementById(i))return;let e=document.createElement("template");e.id=i,e.innerHTML=`
+"use strict";var CoiledWidgets=(()=>{var i="coiled-widget-template";function m(){if(document.getElementById(i))return;let e=document.createElement("template");e.id=i,e.innerHTML=`
     <div class="tp-widget">
       <h3 class="tp-widget__title"></h3>
       <pre class="tp-widget__body"></pre>
     </div>
-  `,document.body.appendChild(e)}function r(e,t){p();let n=document.getElementById(i).content.cloneNode(!0),o=n.querySelector(".tp-widget"),s=n.querySelector(".tp-widget__title"),m=n.querySelector(".tp-widget__body");s.textContent=t.title??"Widget Preview",m.textContent=t.body??"No data provided.",e.innerHTML="",e.appendChild(n),t.metadata&&(o.dataset.metadata=JSON.stringify(t.metadata))}var a="0.1.0";var c="data-coiled-widget";function g(){let e="coiled-widget-styles";if(document.getElementById(e))return;let t=document.createElement("style");t.id=e,t.textContent=`:root {
+  `,document.body.appendChild(e)}function a(e,t){m();let n=document.getElementById(i).content.cloneNode(!0),o=n.querySelector(".tp-widget"),c=n.querySelector(".tp-widget__title"),s=n.querySelector(".tp-widget__body");c.textContent=t.title??"Widget Preview",s.textContent=t.body??"No data provided.",e.innerHTML="",e.appendChild(n),t.metadata&&(o.dataset.metadata=JSON.stringify(t.metadata))}var r="data-coiled-widget";function p(){let e="coiled-widget-styles";if(document.getElementById(e))return;let t=document.createElement("style");t.id=e,t.textContent=`:root {
   --widget-border: #e0e0e0;
   --widget-bg: #fafafa;
   --widget-accent: #1976d2;
@@ -30,5 +30,5 @@
   border-radius: 6px;
   overflow-x: auto;
 }
-`,document.head.appendChild(t)}function l(){g(),document.querySelectorAll(`[${c}]`).forEach(t=>{let d=t,n=d.getAttribute(c);if(n)try{let o=JSON.parse(n);r(d,o)}catch(o){console.error("Failed to render widget payload",o)}})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",l):l();window.CoiledWidgets={VERSION:a,renderWidget:r};})();
+`,document.head.appendChild(t)}function l(){p(),document.querySelectorAll(`[${r}]`).forEach(t=>{let d=t,n=d.getAttribute(r);if(n)try{let o=JSON.parse(n);a(d,o)}catch(o){console.error("Failed to render widget payload",o)}})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",l):l();window.CoiledWidgets={renderWidget:a};})();
 //# sourceMappingURL=index.js.map

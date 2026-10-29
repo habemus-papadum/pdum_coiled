@@ -1,6 +1,8 @@
 """Coiled utils"""
 
-__version__ = "0.1.1-alpha"
+from importlib.metadata import version
+
+__version__ = version("habemus-papadum-coiled")
 
 
 from .fs import find_pyproject_root, iter_git_files
@@ -20,4 +22,3 @@ __all__ = [
     "render_widget_html",
     "setup_notebook",
 ]
-

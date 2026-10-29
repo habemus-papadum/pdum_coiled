@@ -10,27 +10,28 @@ The project uses a modern Python toolchain with UV for dependency management.
 
 ## Important Rules
 
-### Version Management
-**NEVER modify the version number in any file.** Version numbers are managed exclusively by humans. Do not change:
-- `pyproject.toml` version field
-- `src/pdum/coiled/__init__.py` `__version__` variable
-- Any version references in documentation
+### Versions and releases
+`ship` (habemus-papadum-ship) releases this repository's one package,
+`habemus-papadum-coiled`. It has its own version and tag series
+(`habemus-papadum-coiled-v<version>`); between releases the manifest says
+`<last release>+dev`. Never edit a version field by hand. `__version__` reads
+the installed metadata.
 
-If you think a version change is needed, inform the user but do not make the change yourself.
+To release, ask the operator. When they agree, run the release workflow:
+`gh workflow run release.yml -f bump=minor -f dry_run=false` (run with
+`dry_run=true` first to see the plan). Do not publish from this machine.
 
-### Release Management
-**ABSOLUTELY NEVER RUN THE RELEASE SCRIPT (`./scripts/release.sh`).** This is a production deployment script that:
-- Publishes the package to PyPI (affects real users)
-- Creates GitHub releases (public and permanent)
-- Pushes commits and tags to the repository
-- Triggers documentation deployment
+The widgets workspace (`widgets/`, `@habemus-papadum/coiled-widgets`) is
+`private: true`: it is not published to npm and ship does not version it. Its
+built bundle ships inside the wheel.
 
-**This script should ONLY be run by a human who fully understands the consequences.** Do not:
-- Execute `./scripts/release.sh` under any circumstances
-- Suggest running it unless the user explicitly asks about the release process
-- Include it in automated workflows or scripts
-
-If the user needs to make a release, explain the process but let them run the script themselves.
+Do not update repositories that consume this package; their scheduled refresh
+does that. The one exception: if your change needs a newer release of another
+of our packages, raise that package's floor here. Do not pin a
+`habemus-papadum-*` or `@habemus-papadum/*` package to an exact version without
+a reason on the same line or in `[tool.ship.pins]`. Never commit a `path` or
+`editable` entry in `[tool.uv.sources]`, or a `link:`/`file:` dependency
+(`pnpm link` writes one). Run `uv run ship deps check` before you finish.
 
 ## Development Commands
 
@@ -41,7 +42,7 @@ If the user needs to make a release, explain the process but let them run the sc
 ```
 
 **Important for Development**:
-- Use `uv sync --frozen` to ensure the lockfile is used without modification, maintaining reproducible builds
+- Plain `uv sync` and `uv run` keep the locked versions; the lockfile changes only when a command is asked to change it (`uv add`, `uv remove`, `ship deps refresh`). CI uses `--locked`.
 - Re-run `./scripts/setup.sh` whenever dependencies change
 
 ### Testing
@@ -71,10 +72,13 @@ uv run ruff format .
 uv run ruff check --fix .
 ```
 
-### Publishing
+### Releasing
 ```bash
-# Build and publish to PyPI (requires credentials)
-./scripts/publish.sh
+# Plan a release (operators run the real one through the release workflow)
+uv run ship release habemus-papadum-coiled --bump minor --dry-run
+
+# Check the release policy: development links, lockfiles, pins, version marker
+uv run ship deps check
 ```
 
 ### TypeScript widgets (pnpm)
@@ -90,7 +94,7 @@ pnpm --filter '@habemus-papadum/coiled-widgets' test:coverage
 
 - Widget bundle lives in `widgets/`; the compiled JS is copied into `src/pdum/coiled/widgets/index.js`
 - Never commit `widgets/dist/`—it is generated
-- Use `./scripts/pre-release.sh` before asking for review or release
+- After changing widget source, run `build:python` and commit the regenerated `src/pdum/coiled/widgets/index.js`
 
 ## Architecture
 
@@ -103,7 +107,7 @@ pnpm --filter '@habemus-papadum/coiled-widgets' test:coverage
 ### Key Constraints
 - **Python Version**: Requires Python 3.14+
 - **Dependency Management**: Uses UV for Python and pnpm for the widgets workspace; uv.lock is committed
-- **Build System**: Uses Hatch/Hatchling for building distributions
+- **Build System**: Hatchling builds distributions; `ship` runs the build at release time
 
 ### Code Standards
 - **Ruff Configuration**:
@@ -152,15 +156,19 @@ The project uses GitHub Actions for CI (`.github/workflows/ci.yml`):
 - Runs unit tests with coverage reporting
 - Posts coverage report as a PR comment
 
-### Release Process
-Releases are managed by the `./scripts/release.sh` script (HUMANS ONLY):
-1. Validates git repo is clean
-2. Checks version has `-alpha` suffix
-3. Runs all validation (tests, linting)
-4. Strips `-alpha` from version for release
-5. Creates release commit and tag
-6. Publishes to PyPI
-7. Creates GitHub release
-8. Bumps to next development version with `-alpha`
+### Documentation Deployment
+Documentation is deployed to GitHub Pages (`.github/workflows/docs.yml`) on
+every push to `main`, or by hand via workflow_dispatch.
 
-The release script expects versions to follow the pattern: `X.Y.Z-alpha` → `X.Y.Z` → `X.Y.(Z+1)-alpha`
+### Release Process
+Releases run from the `release` workflow (`.github/workflows/release.yml`),
+which calls the reusable workflow in `habemus-papadum/pdum_ship`. It waits for
+`ci.yml` to pass on the same commit, then runs `ship release habemus-papadum-coiled`:
+1. Reads the last tag `habemus-papadum-coiled-v<version>` and applies the requested bump
+2. Writes the release version into `pyproject.toml` and re-locks
+3. Builds, runs the tests, publishes to PyPI with the `PYPI_API_TOKEN` secret
+4. Commits, tags `habemus-papadum-coiled-v<version>`, pushes commit and tag together
+5. Creates the GitHub release
+6. Writes `<version>+dev` back and pushes
+
+Versions follow `X.Y.Z+dev` → `X.Y.Z` (tagged) → `X.Y.Z+dev`.

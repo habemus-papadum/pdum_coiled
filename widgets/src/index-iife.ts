@@ -1,6 +1,5 @@
 import { renderWidget } from './widget';
 import type { WidgetPayload } from './types';
-import { VERSION } from './version';
 
 const DATA_ATTRIBUTE = 'data-coiled-widget';
 declare const __WIDGET_STYLES__: string;
@@ -43,6 +42,5 @@ if (document.readyState === 'loading') {
 }
 
 (window as typeof window & { CoiledWidgets?: Record<string, unknown> }).CoiledWidgets = {
-  VERSION,
   renderWidget,
 };
